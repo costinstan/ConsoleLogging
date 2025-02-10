@@ -1,5 +1,8 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
+using OpenTelemetry;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Resources;
 
 namespace OpenTelemetryConsoleApp
 {
@@ -10,7 +13,12 @@ namespace OpenTelemetryConsoleApp
             var loggerFactory = LoggerFactory.Create(builder =>
             {
                 builder.AddConsole();
-                builder.AddOpenTelemetry();
+                builder.AddOpenTelemetry(
+                    options =>
+                    {
+                        options.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("MatrixLogging"))
+                        .AddProcessor(new SimpleLogRecordExportProcessor(new FileExporter("logFile.txt")));
+                    });
             });
 
             return loggerFactory.CreateLogger<T>();

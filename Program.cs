@@ -20,7 +20,7 @@ namespace OpenTelemetryConsoleApp
             using (var span = tracer.StartActiveSpan("Main"))
             {
                 LoggingService.LogInformation(logger, "Hello, OpenTelemetry with logging!");
-                span.SetAttribute("key", "value");
+                span.SetAttribute("Telemetry", "OpenTelemetry");
 
                 // Matrix summation example
                 int[,] matrix1 = { { 1, 2 }, { 3, 4 } };

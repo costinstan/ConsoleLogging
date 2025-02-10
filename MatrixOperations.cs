@@ -26,7 +26,7 @@ namespace OpenTelemetryConsoleApp
                 }
             }
 
-            _logger.LogError("Matrices have been summed.");
+            _logger.LogWarning("Matrices have been summed.");
 
             return result;
         }
